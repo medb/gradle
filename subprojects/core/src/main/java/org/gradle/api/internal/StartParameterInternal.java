@@ -24,7 +24,10 @@ import java.io.File;
 import java.util.Set;
 
 public class StartParameterInternal extends StartParameter implements Deprecatable {
+
     private final Deprecatable deprecationHandler = new LoggingDeprecatable();
+
+    protected boolean configurationCacheEnabled;
 
     @Override
     public StartParameter newInstance() {
@@ -34,6 +37,13 @@ public class StartParameterInternal extends StartParameter implements Deprecatab
     @Override
     public StartParameter newBuild() {
         return prepareNewBuild(new StartParameterInternal());
+    }
+
+    @Override
+    protected StartParameter prepareNewBuild(StartParameter startParameter) {
+        StartParameterInternal p = (StartParameterInternal) super.prepareNewBuild(startParameter);
+        p.configurationCacheEnabled = configurationCacheEnabled;
+        return startParameter;
     }
 
     @Override
@@ -73,5 +83,13 @@ public class StartParameterInternal extends StartParameter implements Deprecatab
 
     public void setSearchUpwardsWithoutDeprecationWarning(boolean searchUpwards) {
         super.searchUpwards = searchUpwards;
+    }
+
+    public boolean isConfigurationCacheEnabled() {
+        return this.configurationCacheEnabled;
+    }
+
+    public void setConfigurationCacheEnabled(boolean instantExecution) {
+        this.configurationCacheEnabled = instantExecution;
     }
 }

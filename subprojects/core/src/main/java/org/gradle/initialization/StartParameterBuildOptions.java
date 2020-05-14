@@ -44,7 +44,7 @@ public class StartParameterBuildOptions {
     private static List<BuildOption<StartParameterInternal>> options;
 
     static {
-        List<BuildOption<StartParameterInternal>> options = new ArrayList<BuildOption<StartParameterInternal>>();
+        List<BuildOption<StartParameterInternal>> options = new ArrayList<>();
         options.add(new ProjectCacheDirOption());
         options.add(new RerunTasksOption());
         options.add(new ProfileOption());
@@ -69,6 +69,7 @@ public class StartParameterBuildOptions {
         options.add(new DependencyLockingUpdateOption());
         options.add(new RefreshKeysOption());
         options.add(new ExportKeysOption());
+        options.add(new ConfigurationCacheOption());
         StartParameterBuildOptions.options = Collections.unmodifiableList(options);
     }
 
@@ -357,7 +358,7 @@ public class StartParameterBuildOptions {
                 DependencyVerificationMode.values(),
                 GRADLE_PROPERTY,
                 CommandLineOptionConfiguration.create(
-                LONG_OPTION, SHORT_OPTION, "Configures the dependency verification mode (strict, lenient or off)").incubating()
+                    LONG_OPTION, SHORT_OPTION, "Configures the dependency verification mode (strict, lenient or off)").incubating()
             );
         }
 
@@ -406,6 +407,25 @@ public class StartParameterBuildOptions {
         @Override
         public void applyTo(StartParameterInternal settings, Origin origin) {
             settings.setExportKeys(true);
+        }
+    }
+
+    public static class ConfigurationCacheOption extends BooleanBuildOption<StartParameterInternal> {
+
+        public static final String PROPERTY_NAME = "org.gradle.unsafe.configuration-cache";
+        public static final String LONG_OPTION = "configuration-cache";
+
+        public ConfigurationCacheOption() {
+            super(PROPERTY_NAME, BooleanCommandLineOptionConfiguration.create(
+                LONG_OPTION,
+                "Enables the configuration cache. Gradle will try to reuse the build configuration from previous builds.",
+                "Disables the configuration cache."
+            ));
+        }
+
+        @Override
+        public void applyTo(boolean value, StartParameterInternal settings, Origin origin) {
+            settings.setConfigurationCacheEnabled(value);
         }
     }
 }
