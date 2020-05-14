@@ -31,20 +31,17 @@ class InstantExecutionStartParameter(
     private val startParameter: StartParameter
 ) {
 
-    val isEnabled: Boolean by unsafeLazy {
-        (startParameter as StartParameterInternal).isConfigurationCacheEnabled
-    }
+    val isEnabled: Boolean
+        get() = (startParameter as StartParameterInternal).isConfigurationCacheEnabled
 
     val isQuiet: Boolean
         get() = systemPropertyFlag(SystemProperties.isQuiet)
 
-    val maxProblems: Int by unsafeLazy {
-        (startParameter as StartParameterInternal).configurationCacheMaxProblems
-    }
+    val maxProblems: Int
+        get() = (startParameter as StartParameterInternal).configurationCacheMaxProblems
 
-    val failOnProblems: Boolean by unsafeLazy {
-        (startParameter as StartParameterInternal).isConfigurationCacheFailOnProblems
-    }
+    val failOnProblems: Boolean
+        get() = (startParameter as StartParameterInternal).isConfigurationCacheFailOnProblems
 
     val recreateCache: Boolean
         get() = systemPropertyFlag(SystemProperties.recreateCache)
