@@ -57,15 +57,12 @@ class InstantExecutionToolingApiInvocationIntegrationTest extends AbstractInstan
         try {
             connection.newBuild()
                 .forTasks(tasks)
-                .withArguments(INSTANT_EXECUTION_PROPERTY)
+                .withArguments(CONFIGURATION_CACHE_CLI_OPTION)
                 .setStandardOutput(output)
                 .setStandardError(error)
                 .run()
         } finally {
             connection.close()
-            if (GradleContextualExecuter.embedded) {
-                System.clearProperty(SystemProperties.isEnabled)
-            }
         }
         result = OutputScrapingExecutionResult.from(output.toString(), error.toString())
         return result
