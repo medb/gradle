@@ -32,12 +32,14 @@ class InstantExecutionEnablingIntegrationTest extends AbstractInstantExecutionIn
         run 'help', argument
 
         then:
+        outputContainsIncubatingFeatureUsage()
         fixture.assertStateStored()
 
         when:
         run 'help', argument
 
         then:
+        outputContainsIncubatingFeatureUsage()
         fixture.assertStateLoaded()
 
         where:
@@ -58,12 +60,14 @@ class InstantExecutionEnablingIntegrationTest extends AbstractInstantExecutionIn
         run 'help'
 
         then:
+        outputContainsIncubatingFeatureUsage()
         fixture.assertStateStored()
 
         when:
         run 'help'
 
         then:
+        outputContainsIncubatingFeatureUsage()
         fixture.assertStateLoaded()
     }
 
@@ -80,12 +84,14 @@ class InstantExecutionEnablingIntegrationTest extends AbstractInstantExecutionIn
         run 'help'
 
         then:
+        outputContainsIncubatingFeatureUsage()
         fixture.assertStateStored()
 
         when:
         run 'help'
 
         then:
+        outputContainsIncubatingFeatureUsage()
         fixture.assertStateLoaded()
     }
 
@@ -108,5 +114,9 @@ class InstantExecutionEnablingIntegrationTest extends AbstractInstantExecutionIn
         origin            | argument
         "long option"     | "--no-${ConfigurationCacheOption.LONG_OPTION}"
         "system property" | "-D${ConfigurationCacheOption.PROPERTY_NAME}=false"
+    }
+
+    private void outputContainsIncubatingFeatureUsage() {
+        outputContains("Configuration cache is an incubating feature.")
     }
 }
