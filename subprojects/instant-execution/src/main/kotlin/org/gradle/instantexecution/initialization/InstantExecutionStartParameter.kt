@@ -45,7 +45,7 @@ class InstantExecutionStartParameter(
     }
 
     val failOnProblems: Boolean by unsafeLazy {
-        systemPropertyFlag(SystemProperties.failOnProblems, true)
+        (startParameter as StartParameterInternal).isConfigurationCacheFailOnProblems
     }
 
     val recreateCache: Boolean

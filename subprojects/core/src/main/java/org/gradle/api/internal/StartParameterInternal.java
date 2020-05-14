@@ -28,6 +28,7 @@ public class StartParameterInternal extends StartParameter implements Deprecatab
     private final Deprecatable deprecationHandler = new LoggingDeprecatable();
 
     protected boolean configurationCacheEnabled;
+    protected boolean configurationCacheFailOnProblems = true;
 
     @Override
     public StartParameter newInstance() {
@@ -43,6 +44,7 @@ public class StartParameterInternal extends StartParameter implements Deprecatab
     protected StartParameter prepareNewBuild(StartParameter startParameter) {
         StartParameterInternal p = (StartParameterInternal) super.prepareNewBuild(startParameter);
         p.configurationCacheEnabled = configurationCacheEnabled;
+        p.configurationCacheFailOnProblems = configurationCacheFailOnProblems;
         return startParameter;
     }
 
@@ -91,5 +93,13 @@ public class StartParameterInternal extends StartParameter implements Deprecatab
 
     public void setConfigurationCacheEnabled(boolean instantExecution) {
         this.configurationCacheEnabled = instantExecution;
+    }
+
+    public boolean isConfigurationCacheFailOnProblems() {
+        return configurationCacheFailOnProblems;
+    }
+
+    public void setConfigurationCacheFailOnProblems(boolean configurationCacheFailOnProblems) {
+        this.configurationCacheFailOnProblems = configurationCacheFailOnProblems;
     }
 }

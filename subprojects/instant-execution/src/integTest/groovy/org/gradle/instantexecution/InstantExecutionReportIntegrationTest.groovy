@@ -116,7 +116,7 @@ class InstantExecutionReportIntegrationTest extends AbstractInstantExecutionInte
 
         when:
         instantFails 'taskWithStateSerializationProblems', 'a', 'b',
-            "-D${SystemProperties.failOnProblems}=false", "-D${SystemProperties.maxProblems}=2"
+            DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION, "-D${SystemProperties.maxProblems}=2"
 
         then:
         notExecuted(':taskWithStateSerializationProblems', ':a', ':b')
@@ -127,7 +127,7 @@ class InstantExecutionReportIntegrationTest extends AbstractInstantExecutionInte
 
         when:
         instantFails 'taskWithStateSerializationProblems', 'a', 'b',
-            "-D${SystemProperties.failOnProblems}=false", "-D${SystemProperties.maxProblems}=4"
+            DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION, "-D${SystemProperties.maxProblems}=4"
 
         then:
         executed(':taskWithStateSerializationProblems', ':a', ':b')
@@ -471,7 +471,7 @@ class InstantExecutionReportIntegrationTest extends AbstractInstantExecutionInte
         """
 
         when:
-        instantRun "foo", "-D${SystemProperties.failOnProblems}=false"
+        instantRun "foo", DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION
 
         then:
         problems.assertResultHasProblems(result) {

@@ -16,6 +16,7 @@
 
 package org.gradle.performance.regression.android
 
+import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheFailOnProblemsOption
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheOption
 import org.gradle.integtests.fixtures.versions.AndroidGradlePluginVersions
 import org.gradle.internal.scan.config.fixtures.GradleEnterprisePluginSettingsFixture
@@ -115,7 +116,7 @@ class FasterIncrementalAndroidBuildsPerformanceTest extends AbstractCrossBuildPe
                 "-Dorg.gradle.workers.max=8",
                 "--no-build-cache",
                 "--no-scan",
-                "-Dorg.gradle.unsafe.instant-execution.fail-on-problems=false" // TODO remove
+                "--no-${ConfigurationCacheFailOnProblemsOption.LONG_OPTION}" // TODO remove
             )
             builder.invocation.useToolingApi()
             builder.warmUpCount(1)

@@ -70,6 +70,7 @@ public class StartParameterBuildOptions {
         options.add(new RefreshKeysOption());
         options.add(new ExportKeysOption());
         options.add(new ConfigurationCacheOption());
+        options.add(new ConfigurationCacheFailOnProblemsOption());
         StartParameterBuildOptions.options = Collections.unmodifiableList(options);
     }
 
@@ -426,6 +427,25 @@ public class StartParameterBuildOptions {
         @Override
         public void applyTo(boolean value, StartParameterInternal settings, Origin origin) {
             settings.setConfigurationCacheEnabled(value);
+        }
+    }
+
+    public static class ConfigurationCacheFailOnProblemsOption extends BooleanBuildOption<StartParameterInternal> {
+
+        public static final String PROPERTY_NAME = "org.gradle.unsafe.configuration-cache.fail-on-problems";
+        public static final String LONG_OPTION = "configuration-cache-fail-on-problems";
+
+        public ConfigurationCacheFailOnProblemsOption() {
+            super(PROPERTY_NAME, BooleanCommandLineOptionConfiguration.create(
+                LONG_OPTION,
+                "Lets the configuration cache fail on problems. This is the default.",
+                "Lets the configuration cache do not fail on problems."
+            ).incubating());
+        }
+
+        @Override
+        public void applyTo(boolean value, StartParameterInternal settings, Origin origin) {
+            settings.setConfigurationCacheFailOnProblems(value);
         }
     }
 }

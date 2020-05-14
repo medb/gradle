@@ -16,6 +16,7 @@
 
 package org.gradle.instantexecution
 
+import org.gradle.initialization.StartParameterBuildOptions
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheOption
 import org.gradle.integtests.fixtures.AbstractIntegrationSpec
 import org.gradle.integtests.fixtures.BuildOperationsFixture
@@ -30,6 +31,8 @@ import org.intellij.lang.annotations.Language
 class AbstractInstantExecutionIntegrationTest extends AbstractIntegrationSpec {
 
     protected static final String CONFIGURATION_CACHE_CLI_OPTION = "--${ConfigurationCacheOption.LONG_OPTION}"
+    static final String FAIL_ON_PROBLEMS_CLI_OPTION = InstantExecutionProblemsFixture.FAIL_ON_PROBLEMS_CLI_OPTION
+    static final String DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION = InstantExecutionProblemsFixture.DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION
 
     protected InstantExecutionProblemsFixture problems
 

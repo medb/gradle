@@ -55,6 +55,7 @@ dependencies {
     implementation(project(":toolingApi"))
     implementation(project(":buildEvents"))
     implementation(project(":native"))
+    implementation(project(":buildOption"))
 
     implementation(library("groovy"))
     implementation(library("slf4j_api"))
@@ -74,7 +75,6 @@ dependencies {
     integTestImplementation(project(":platformJvm"))
     integTestImplementation(project(":testKit"))
     integTestImplementation(project(":launcher"))
-    integTestImplementation(project(":buildOption"))
 
     integTestImplementation(library("guava"))
     integTestImplementation(library("ant"))

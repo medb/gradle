@@ -16,6 +16,7 @@
 
 package org.gradle.instantexecution
 
+import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheFailOnProblemsOption
 import org.gradle.instantexecution.problems.PropertyProblem
 import org.gradle.instantexecution.problems.buildConsoleSummary
 
@@ -70,7 +71,7 @@ open class InstantExecutionProblemsException : InstantExecutionException {
         htmlReportFile: File
     ) : this(
         "Instant execution problems found in this build.\n" +
-            "Failing because -D${SystemProperties.failOnProblems} is 'true'.",
+            "This behavior can be changed via --no-${ConfigurationCacheFailOnProblemsOption.LONG_OPTION}.",
         problems,
         htmlReportFile
     )
