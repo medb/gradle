@@ -17,6 +17,7 @@
 package org.gradle.instantexecution.initialization
 
 import org.gradle.StartParameter
+import org.gradle.api.internal.StartParameterInternal
 import org.gradle.initialization.layout.BuildLayout
 import org.gradle.instantexecution.SystemProperties
 import org.gradle.instantexecution.extensions.unsafeLazy
@@ -31,7 +32,7 @@ class InstantExecutionStartParameter(
 ) {
 
     val isEnabled: Boolean by unsafeLazy {
-        systemPropertyFlag(SystemProperties.isEnabled)
+        (startParameter as StartParameterInternal).isConfigurationCacheEnabled
     }
 
     val isQuiet: Boolean
