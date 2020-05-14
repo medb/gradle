@@ -116,7 +116,7 @@ class InstantExecutionReportIntegrationTest extends AbstractInstantExecutionInte
 
         when:
         instantFails 'taskWithStateSerializationProblems', 'a', 'b',
-            DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION, "-D${SystemProperties.maxProblems}=2"
+            DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION, "${MAX_PROBLEMS_CLI_OPTION}=2"
 
         then:
         notExecuted(':taskWithStateSerializationProblems', ':a', ':b')
@@ -127,7 +127,7 @@ class InstantExecutionReportIntegrationTest extends AbstractInstantExecutionInte
 
         when:
         instantFails 'taskWithStateSerializationProblems', 'a', 'b',
-            DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION, "-D${SystemProperties.maxProblems}=4"
+            DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION, "${MAX_PROBLEMS_CLI_OPTION}=4"
 
         then:
         executed(':taskWithStateSerializationProblems', ':a', ':b')
@@ -439,7 +439,7 @@ class InstantExecutionReportIntegrationTest extends AbstractInstantExecutionInte
 
         when:
         problems.withDoNotFailOnProblems()
-        instantFails "foo", "-D${SystemProperties.maxProblems}=$maxProblems"
+        instantFails "foo", "${MAX_PROBLEMS_CLI_OPTION}=$maxProblems"
 
         then:
         def expectedProblems = (1..expectedNumberOfProblems).collect {

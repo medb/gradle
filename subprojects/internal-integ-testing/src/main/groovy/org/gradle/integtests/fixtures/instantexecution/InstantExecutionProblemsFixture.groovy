@@ -19,6 +19,7 @@ package org.gradle.integtests.fixtures.instantexecution
 import groovy.transform.PackageScope
 import org.gradle.api.Action
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheFailOnProblemsOption
+import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheMaxProblemsOption
 import org.gradle.instantexecution.SystemProperties
 import org.gradle.integtests.fixtures.executer.ExecutionFailure
 import org.gradle.integtests.fixtures.executer.ExecutionResult
@@ -51,6 +52,7 @@ final class InstantExecutionProblemsFixture {
 
     static final String FAIL_ON_PROBLEMS_CLI_OPTION = "--${ConfigurationCacheFailOnProblemsOption.LONG_OPTION}"
     static final String DO_NOT_FAIL_ON_PROBLEMS_CLI_OPTION = "--no-${ConfigurationCacheFailOnProblemsOption.LONG_OPTION}"
+    static final String MAX_PROBLEMS_CLI_OPTION = "--${ConfigurationCacheMaxProblemsOption.LONG_OPTION}"
 
     protected static final String PROBLEMS_REPORT_HTML_FILE_NAME = "instant-execution-report.html"
 
@@ -220,7 +222,7 @@ final class InstantExecutionProblemsFixture {
     private static Matcher<String> failureDescriptionMatcherForTooManyProblems(HasInstantExecutionProblemsSpec spec) {
         return buildMatcherForProblemsFailureDescription(
             "Maximum number of instant execution problems has been reached.\n" +
-                "This behavior can be adjusted via -D${SystemProperties.maxProblems}=<integer>.",
+                "This behavior can be adjusted via ${MAX_PROBLEMS_CLI_OPTION}=<integer>.",
             spec
         )
     }

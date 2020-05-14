@@ -19,6 +19,7 @@ package org.gradle.smoketests
 import org.apache.commons.io.FileUtils
 import org.gradle.cache.internal.DefaultGeneratedGradleJarCache
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheFailOnProblemsOption
+import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheMaxProblemsOption
 import org.gradle.integtests.fixtures.instantexecution.InstantExecutionBuildOperationsFixture
 import org.gradle.integtests.fixtures.BuildOperationTreeFixture
 import org.gradle.integtests.fixtures.RepoScriptBlockUtil
@@ -206,7 +207,7 @@ abstract class AbstractSmokeTest extends Specification {
             if (maxProblems > 0) {
                 parameters += [
                     "--no-${ConfigurationCacheFailOnProblemsOption.LONG_OPTION}".toString(),
-                    "-Dorg.gradle.unsafe.instant-execution.max-problems=$maxProblems".toString()
+                    "--${ConfigurationCacheMaxProblemsOption.LONG_OPTION}=$maxProblems".toString()
                 ]
             }
         }

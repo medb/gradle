@@ -39,9 +39,7 @@ class InstantExecutionStartParameter(
         get() = systemPropertyFlag(SystemProperties.isQuiet)
 
     val maxProblems: Int by unsafeLazy {
-        systemProperty(SystemProperties.maxProblems)
-            ?.let(Integer::valueOf)
-            ?: 512
+        (startParameter as StartParameterInternal).configurationCacheMaxProblems
     }
 
     val failOnProblems: Boolean by unsafeLazy {

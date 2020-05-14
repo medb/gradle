@@ -22,7 +22,5 @@ object SystemProperties {
 
     const val isQuiet = "org.gradle.unsafe.instant-execution.quiet"
 
-    const val maxProblems = "org.gradle.unsafe.instant-execution.max-problems"
-
     const val recreateCache = "org.gradle.unsafe.instant-execution.recreate-cache"
 }

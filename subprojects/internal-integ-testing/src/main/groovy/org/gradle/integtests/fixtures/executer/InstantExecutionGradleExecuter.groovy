@@ -16,6 +16,7 @@
 
 package org.gradle.integtests.fixtures.executer
 
+import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheMaxProblemsOption
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheOption
 import org.gradle.instantexecution.SystemProperties
 import org.gradle.test.fixtures.file.TestDirectoryProvider
@@ -27,7 +28,7 @@ class InstantExecutionGradleExecuter extends DaemonGradleExecuter {
     static final List<String> INSTANT_EXECUTION_ARGS = [
             "--${ConfigurationCacheOption.LONG_OPTION}",
             "-D${SystemProperties.isQuiet}=true",
-            "-D${SystemProperties.maxProblems}=0"
+            "--${ConfigurationCacheMaxProblemsOption.LONG_OPTION}=0"
     ].collect { it.toString() }
 
     InstantExecutionGradleExecuter(

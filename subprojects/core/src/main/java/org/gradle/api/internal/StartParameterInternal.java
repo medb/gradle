@@ -29,6 +29,7 @@ public class StartParameterInternal extends StartParameter implements Deprecatab
 
     protected boolean configurationCacheEnabled;
     protected boolean configurationCacheFailOnProblems = true;
+    protected int configurationCacheMaxProblems = 512;
 
     @Override
     public StartParameter newInstance() {
@@ -45,6 +46,7 @@ public class StartParameterInternal extends StartParameter implements Deprecatab
         StartParameterInternal p = (StartParameterInternal) super.prepareNewBuild(startParameter);
         p.configurationCacheEnabled = configurationCacheEnabled;
         p.configurationCacheFailOnProblems = configurationCacheFailOnProblems;
+        p.configurationCacheMaxProblems = configurationCacheMaxProblems;
         return startParameter;
     }
 
@@ -101,5 +103,13 @@ public class StartParameterInternal extends StartParameter implements Deprecatab
 
     public void setConfigurationCacheFailOnProblems(boolean configurationCacheFailOnProblems) {
         this.configurationCacheFailOnProblems = configurationCacheFailOnProblems;
+    }
+
+    public int getConfigurationCacheMaxProblems() {
+        return configurationCacheMaxProblems;
+    }
+
+    public void setConfigurationCacheMaxProblems(int configurationCacheMaxProblems) {
+        this.configurationCacheMaxProblems = configurationCacheMaxProblems;
     }
 }

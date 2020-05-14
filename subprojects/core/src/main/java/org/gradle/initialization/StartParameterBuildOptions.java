@@ -29,6 +29,7 @@ import org.gradle.internal.buildoption.BuildOption;
 import org.gradle.internal.buildoption.CommandLineOptionConfiguration;
 import org.gradle.internal.buildoption.EnabledOnlyBooleanBuildOption;
 import org.gradle.internal.buildoption.EnumBuildOption;
+import org.gradle.internal.buildoption.IntegerBuildOption;
 import org.gradle.internal.buildoption.ListBuildOption;
 import org.gradle.internal.buildoption.Origin;
 import org.gradle.internal.buildoption.StringBuildOption;
@@ -71,6 +72,7 @@ public class StartParameterBuildOptions {
         options.add(new ExportKeysOption());
         options.add(new ConfigurationCacheOption());
         options.add(new ConfigurationCacheFailOnProblemsOption());
+        options.add(new ConfigurationCacheMaxProblemsOption());
         StartParameterBuildOptions.options = Collections.unmodifiableList(options);
     }
 
@@ -446,6 +448,24 @@ public class StartParameterBuildOptions {
         @Override
         public void applyTo(boolean value, StartParameterInternal settings, Origin origin) {
             settings.setConfigurationCacheFailOnProblems(value);
+        }
+    }
+
+    public static class ConfigurationCacheMaxProblemsOption extends IntegerBuildOption<StartParameterInternal> {
+
+        public static final String PROPERTY_NAME = "org.gradle.unsafe.configuration-cache.max-problems";
+        public static final String LONG_OPTION = "configuration-cache-max-problems";
+
+        public ConfigurationCacheMaxProblemsOption() {
+            super(PROPERTY_NAME, CommandLineOptionConfiguration.create(
+                LONG_OPTION,
+                "Sets the maximum configuration cache problems."
+            ).incubating());
+        }
+
+        @Override
+        public void applyTo(int value, StartParameterInternal settings, Origin origin) {
+            settings.setConfigurationCacheMaxProblems(value);
         }
     }
 }
