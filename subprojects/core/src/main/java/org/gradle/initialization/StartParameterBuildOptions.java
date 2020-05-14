@@ -420,7 +420,7 @@ public class StartParameterBuildOptions {
                 LONG_OPTION,
                 "Enables the configuration cache. Gradle will try to reuse the build configuration from previous builds.",
                 "Disables the configuration cache."
-            ));
+            ).incubating());
         }
 
         @Override
