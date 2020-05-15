@@ -73,13 +73,13 @@ class GradleBuildInstantExecutionSmokeTest extends AbstractSmokeTest {
         instantRun(*supportedTasks)
 
         then:
-        result.output.count("Calculating task graph as no instant execution cache is available") == 1
+        result.output.count("Calculating task graph as no configuration cache is available") == 1
 
         when:
         instantRun(*supportedTasks)
 
         then:
-        result.output.count("Reusing instant execution cache") == 1
+        result.output.count("Reusing configuration cache") == 1
         result.task(":distributions:binZip").outcome == TaskOutcome.UP_TO_DATE
         result.task(":core:integTest").outcome == TaskOutcome.UP_TO_DATE
 
@@ -90,7 +90,7 @@ class GradleBuildInstantExecutionSmokeTest extends AbstractSmokeTest {
         instantRun(*supportedTasks)
 
         then:
-        result.output.count("Reusing instant execution cache") == 1
+        result.output.count("Reusing configuration cache") == 1
 
         and:
         file("build/distributions").allDescendants().count { it ==~ /gradle-.*-bin.zip/ } == 1
