@@ -16,7 +16,6 @@
 
 package org.gradle.instantexecution
 
-import org.gradle.initialization.StartParameterBuildOptions
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheOption
 import org.gradle.integtests.fixtures.AbstractIntegrationSpec
 import org.gradle.integtests.fixtures.BuildOperationsFixture

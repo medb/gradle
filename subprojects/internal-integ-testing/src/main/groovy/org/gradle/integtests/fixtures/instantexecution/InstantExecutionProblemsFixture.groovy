@@ -20,7 +20,6 @@ import groovy.transform.PackageScope
 import org.gradle.api.Action
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheFailOnProblemsOption
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheMaxProblemsOption
-import org.gradle.instantexecution.SystemProperties
 import org.gradle.integtests.fixtures.executer.ExecutionFailure
 import org.gradle.integtests.fixtures.executer.ExecutionResult
 import org.gradle.integtests.fixtures.executer.GradleExecuter
