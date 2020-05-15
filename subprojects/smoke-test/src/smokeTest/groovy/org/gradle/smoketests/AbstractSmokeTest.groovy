@@ -20,11 +20,11 @@ import org.apache.commons.io.FileUtils
 import org.gradle.cache.internal.DefaultGeneratedGradleJarCache
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheFailOnProblemsOption
 import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheMaxProblemsOption
+import org.gradle.initialization.StartParameterBuildOptions.ConfigurationCacheOption
 import org.gradle.integtests.fixtures.instantexecution.InstantExecutionBuildOperationsFixture
 import org.gradle.integtests.fixtures.BuildOperationTreeFixture
 import org.gradle.integtests.fixtures.RepoScriptBlockUtil
 import org.gradle.integtests.fixtures.executer.GradleContextualExecuter
-import org.gradle.integtests.fixtures.executer.InstantExecutionGradleExecuter
 import org.gradle.integtests.fixtures.executer.IntegrationTestBuildContext
 import org.gradle.integtests.fixtures.versions.AndroidGradlePluginVersions
 import org.gradle.internal.featurelifecycle.LoggingDeprecatedFeatureHandler
@@ -201,15 +201,16 @@ abstract class AbstractSmokeTest extends Specification {
     private List<String> buildContextParameters() {
         List<String> parameters = []
         if (GradleContextualExecuter.isInstant()) {
-            parameters += InstantExecutionGradleExecuter.INSTANT_EXECUTION_ARGS
-            parameters += ["-D${BuildOperationTrace.SYSPROP}=${buildOperationTracePath()}".toString()]
+            parameters += [
+                "--${ConfigurationCacheOption.LONG_OPTION}".toString(),
+                "-Dorg.gradle.unsafe.instant-execution.quiet=true".toString()
+            ]
             def maxProblems = maxInstantExecutionProblems()
+            parameters += ["--${ConfigurationCacheMaxProblemsOption.LONG_OPTION}=$maxProblems".toString()]
             if (maxProblems > 0) {
-                parameters += [
-                    "--no-${ConfigurationCacheFailOnProblemsOption.LONG_OPTION}".toString(),
-                    "--${ConfigurationCacheMaxProblemsOption.LONG_OPTION}=$maxProblems".toString()
-                ]
+                parameters += ["--no-${ConfigurationCacheFailOnProblemsOption.LONG_OPTION}".toString()]
             }
+            parameters += ["-D${BuildOperationTrace.SYSPROP}=${buildOperationTracePath()}".toString()]
         }
         def generatedApiJarCacheDir = IntegrationTestBuildContext.INSTANCE.gradleGeneratedApiJarCacheDir
         if (generatedApiJarCacheDir == null) {
